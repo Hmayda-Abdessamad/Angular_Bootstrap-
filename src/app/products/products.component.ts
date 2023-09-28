@@ -3,6 +3,7 @@ import {ProductService} from "../services/product.service";
 import {Product} from "../models/product.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {AuthenticationService} from "../services/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-products',
@@ -18,7 +19,7 @@ export class ProductsComponent implements OnInit{
     sizePage:number=5
     totalPages:number=0
     curentAction:string="all"
-    constructor(private ProductService:ProductService,private fb:FormBuilder,public authService:AuthenticationService) {
+    constructor(private ProductService:ProductService,private fb:FormBuilder,public authService:AuthenticationService,private router:Router) {
       this.searchFormGroup=this.fb.group({
         keyword:null
       })
@@ -94,5 +95,13 @@ export class ProductsComponent implements OnInit{
       this.getPageProducts()
     else
       this.handleSearchProducts()
+  }
+
+  handleAddProduct() {
+    this.router.navigateByUrl("/admin/addProduct")
+  }
+
+  handleEditProduct(p: Product) {
+    this.router.navigateByUrl("/admin/editProduct/"+p.id)
   }
 }

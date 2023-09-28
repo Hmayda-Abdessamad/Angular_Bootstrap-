@@ -1,5 +1,9 @@
 
 <div class="container m-5 overflow-y-scroll" >
+  <nav *ngIf="authService.hasrole('ADMIN')" class="p-2 m-3 border border-info">
+      <button class="btn btn-outline-primary" (click)="handleAddProduct()"> Ajouter un Product</button>
+  </nav>
+
  <ng-template #errors>
    <div class="text-danger">
      {{errMSG}}
@@ -46,6 +50,12 @@
               <span *ngIf="p.promotion==false"> Promo On</span>
             </button>
 
+          </td>
+
+          <td *ngIf="authService.hasrole('ADMIN')">
+            <button (click)="handleEditProduct(p)" class="btn  btn-success">
+              <i class="bi bi-file"></i>
+            </button>
           </td>
 
           <td *ngIf="authService.hasrole('ADMIN')">
