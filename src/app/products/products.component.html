@@ -1,3 +1,4 @@
+
 <div class="container m-5 overflow-y-scroll" >
  <ng-template #errors>
    <div class="text-danger">
@@ -34,23 +35,28 @@
           <td>{{p.id}}</td>
           <td>{{p.name}}</td>
           <td>{{p.price}}</td>
+
           <td>
+            <i *ngIf="p.promotion" class="bi bi-heart-fill text-success "></i>
+          </td>
+
+          <td *ngIf="authService.hasrole('ADMIN')">
+            <button (click)="setPromotion(p)" [ngClass]="p.promotion==true?'btn-success':'btn-danger'" class="btn">
+              <span *ngIf="p.promotion==true"> Promo Off</span>
+              <span *ngIf="p.promotion==false"> Promo On</span>
+            </button>
+
+          </td>
+
+          <td *ngIf="authService.hasrole('ADMIN')">
             <button (click)="handledeleteProduct(p)" class="btn  btn-danger">
               <i class="bi bi-trash"></i>
             </button>
           </td>
 
-          <td>
-              <i *ngIf="p.promotion" class="bi bi-heart-fill text-success "></i>
-          </td>
 
-          <td>
-            <button (click)="setPromotion(p)" [ngClass]="p.promotion==true?'btn-success':'btn-danger'" class="btn">
-             <span *ngIf="p.promotion==true"> Promo Off</span>
-              <span *ngIf="p.promotion==false"> Promo On</span>
-            </button>
 
-          </td>
+
         </tr>
         </tbody>
       </table>

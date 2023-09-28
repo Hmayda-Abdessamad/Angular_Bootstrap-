@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProductService} from "../services/product.service";
 import {Product} from "../models/product.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {AuthenticationService} from "../services/authentication.service";
 
 @Component({
   selector: 'app-products',
@@ -17,7 +18,7 @@ export class ProductsComponent implements OnInit{
     sizePage:number=5
     totalPages:number=0
     curentAction:string="all"
-    constructor(private ProductService:ProductService,private fb:FormBuilder) {
+    constructor(private ProductService:ProductService,private fb:FormBuilder,public authService:AuthenticationService) {
       this.searchFormGroup=this.fb.group({
         keyword:null
       })
